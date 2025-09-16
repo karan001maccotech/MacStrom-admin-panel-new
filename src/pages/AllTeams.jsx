@@ -115,26 +115,26 @@ const TeamManagement = () => {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading teams...</p>
+          <p className="text-gray-600 dark:text-gray-200">Loading teams...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-800 p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+        <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border p-6 mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Team Management</h1>
-              <p className="text-gray-600 mt-2">Manage your gaming teams and tournaments</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-zinc-300">Team Management</h1>
+              <p className="text-gray-600 dark:text-gray-200 mt-2">Manage your gaming teams and tournaments</p>
             </div>
             <div className="flex items-center space-x-4">
               <div className="text-right">
                 <p className="text-2xl font-bold text-blue-600">{teams.length}</p>
-                <p className="text-sm text-gray-500">Total Teams</p>
+                <p className="text-sm text-gray-500 dark:text-gray-200">Total Teams</p>
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@ const TeamManagement = () => {
         {/* Teams Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {teams.map((team) => (
-            <div key={team.id} className="bg-white rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow">
+            <div key={team.id} className="bg-white dark:bg-neutral-900 rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow">
               {/* Team Image */}
               <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
                 {team.imageUrl ? (
@@ -168,9 +168,9 @@ const TeamManagement = () => {
                 <div className="absolute top-4 right-4 flex space-x-2">
                   <button
                     onClick={() => setEditingTeam(team)}
-                    className="bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-700 p-2 rounded-full transition-all"
+                    className="dark:bg-white bg-neutral-900 bg-opacity-90 hover:bg-opacity-100 text-gray-200 dark:text-gray-700 p-2 rounded-full transition-all"
                   >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-4 h-4 " />
                   </button>
                   <button
                     onClick={() => setShowDeleteModal(team)}
@@ -183,15 +183,15 @@ const TeamManagement = () => {
 
               {/* Team Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{team.name}</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-zinc-300 mb-4">{team.name}</h3>
                 
                 {/* Team Stats */}
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-gray-600 dark:text-gray-200">
                     <DollarSign className="w-4 h-4 mr-2" />
                     <span className="text-sm">Registration: ₹{team.registrationAmount}</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
+                  <div className="flex items-center text-gray-600 dark:text-gray-200">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span className="text-sm">Last Date: {formatDate(team.lastRegistrationDate)}</span>
                   </div>
@@ -205,7 +205,7 @@ const TeamManagement = () => {
                       {team.rules.map((rule) => (
                         <div key={rule.id} className="flex items-start">
                           <CheckCircle className="w-3 h-3 text-green-500 mt-1 mr-2 flex-shrink-0" />
-                          <span className="text-xs text-gray-600">
+                          <span className="text-xs text-gray-600 dark:text-gray-200">
                             {rule.text === '[object Object]' ? 'Rule details' : rule.text}
                           </span>
                         </div>
@@ -238,7 +238,7 @@ const TeamManagement = () => {
                           <span className="bg-blue-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
                             {index + 1}
                           </span>
-                          <span className="text-xs text-gray-600">{step.text}</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-200">{step.text}</span>
                         </div>
                       ))}
                     </div>
@@ -252,12 +252,12 @@ const TeamManagement = () => {
         {/* Edit Modal */}
         {editingTeam && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <div className="bg-white dark:bg-neutral-900 rounded-lg max-w-md w-full p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Edit Team</h2>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-zinc-300">Edit Team</h2>
                 <button
                   onClick={() => setEditingTeam(null)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-gray-400 hover:text-gray-600 dark:text-gray-200"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -334,13 +334,13 @@ const TeamManagement = () => {
         {/* Delete Confirmation Modal */}
         {showDeleteModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <div className="bg-white dark:bg-neutral-900 rounded-lg max-w-md w-full p-6">
               <div className="text-center">
                 <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trash2 className="w-6 h-6 text-red-600" />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 mb-2">Delete Team</h2>
-                <p className="text-gray-600 mb-6">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-zinc-300 mb-2">Delete Team</h2>
+                <p className="text-gray-600 dark:text-gray-200 mb-6">
                   Are you sure you want to delete "{showDeleteModal.name}"? This action cannot be undone.
                 </p>
                 <div className="flex space-x-3">
@@ -366,8 +366,8 @@ const TeamManagement = () => {
         {teams.length === 0 && !loading && (
           <div className="text-center py-12">
             <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No teams found</h3>
-            <p className="text-gray-600">Teams will appear here when they are created.</p>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-zinc-300 mb-2">No teams found</h3>
+            <p className="text-gray-600 dark:text-gray-200">Teams will appear here when they are created.</p>
           </div>
         )}
       </div>

@@ -79,7 +79,7 @@ const WithdrawalTable = () => {
 
     return (
       <span
-        className={`px-2 py-1 text-xs font-medium rounded-full border ${statusClasses[status] || "bg-gray-100 text-gray-800 border-gray-200"}`}
+        className={`px-2 py-1 text-xs font-medium rounded-full border ${statusClasses[status] || "bg-gray-100 text-gray-800 dark:text-gray-100 border-gray-200"}`}
       >
         {status?.charAt(0).toUpperCase() + status?.slice(1) || "Unknown"}
       </span>
@@ -89,7 +89,7 @@ const WithdrawalTable = () => {
   const ActionButtons = ({ withdrawal, serialNo }) => {
     if (withdrawal.status === 'approved' || withdrawal.status === 'rejected') {
       return (
-        <span className="text-xs text-gray-500 italic">
+        <span className="text-xs text-gray-600 dark:text-gray-200 italic">
           {withdrawal.status === 'approved' ? 'Already Approved' : 'Already Rejected'}
         </span>
       )
@@ -123,41 +123,41 @@ const WithdrawalTable = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-800">Withdrawal Requests</h2>
-          <p className="text-sm text-gray-600 mt-1">Total: {withdrawals.length} requests</p>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Withdrawal Requests</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-200 mt-1">Total: {withdrawals.length} requests</p>
         </div>
 
         {/* Desktop Table */}
         <div className="hidden lg:block overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 dark:bg-neutral-800">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sr. No</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">Sr. No</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">User</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Amount
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Payment Method
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Created
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Description
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-200 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-neutral-900 divide-y divide-gray-200">
               {currentItems.map((withdrawal, index) => {
                 const serialNo = indexOfFirstItem + index + 1
                 return (
@@ -167,19 +167,19 @@ const WithdrawalTable = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">{withdrawal.User?.user_name || "N/A"}</div>
-                      <div className="text-sm text-gray-500">{withdrawal.User?.email_id || "No email"}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-200">{withdrawal.User?.email_id || "No email"}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                       ₹{withdrawal.amount}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
                       {withdrawal.payment_method?.toUpperCase() || "N/A"}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(withdrawal.status)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
                       {formatDate(withdrawal.createdAt)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">{withdrawal.description}</td>
+                    <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-200 max-w-xs truncate">{withdrawal.description}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <ActionButtons withdrawal={withdrawal} serialNo={serialNo} />
                     </td>
@@ -206,17 +206,17 @@ const WithdrawalTable = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-gray-500">User:</span>
+                      <span className="text-gray-600 dark:text-gray-200">User:</span>
                       <div className="font-medium text-gray-900">{withdrawal.User?.user_name || "N/A"}</div>
-                      <div className="text-gray-500">{withdrawal.User?.email_id || "No email"}</div>
+                      <div className="text-gray-600 dark:text-gray-200">{withdrawal.User?.email_id || "No email"}</div>
                     </div>
                     <div>
-                      <span className="text-gray-500">Payment:</span>
+                      <span className="text-gray-600 dark:text-gray-200">Payment:</span>
                       <div className="text-gray-900">{withdrawal.payment_method?.toUpperCase() || "N/A"}</div>
                     </div>
                   </div>
                   <div className="mt-2 text-sm">
-                    <span className="text-gray-500">Created:</span>
+                    <span className="text-gray-600 dark:text-gray-200">Created:</span>
                     <span className="ml-2 text-gray-900">{formatDate(withdrawal.createdAt)}</span>
                   </div>
                   <div className="mt-1 text-sm text-gray-600">{withdrawal.description}</div>
@@ -246,17 +246,17 @@ const WithdrawalTable = () => {
 
                   <div className="space-y-2 text-sm">
                     <div>
-                      <span className="text-gray-500">User:</span>
+                      <span className="text-gray-600 dark:text-gray-200">User:</span>
                       <div className="font-medium text-gray-900">{withdrawal.User?.user_name || "N/A"}</div>
                     </div>
 
                     <div>
-                      <span className="text-gray-500">Payment Method:</span>
+                      <span className="text-gray-600 dark:text-gray-200">Payment Method:</span>
                       <span className="ml-2 text-gray-900">{withdrawal.payment_method?.toUpperCase() || "N/A"}</span>
                     </div>
 
                     <div>
-                      <span className="text-gray-500">Created:</span>
+                      <span className="text-gray-600 dark:text-gray-200">Created:</span>
                       <span className="ml-2 text-gray-900">{formatDate(withdrawal.createdAt)}</span>
                     </div>
 
@@ -273,19 +273,19 @@ const WithdrawalTable = () => {
         </div>
 
         {/* Pagination */}
-        <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <div className="bg-white dark:bg-neutral-900 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
           <div className="flex-1 flex justify-between sm:hidden">
             <button
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
-              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-neutral-900 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Previous
             </button>
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-neutral-900 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Next
             </button>
@@ -293,7 +293,7 @@ const WithdrawalTable = () => {
 
           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-700 dark:text-gray-200">
                 Showing <span className="font-medium">{indexOfFirstItem + 1}</span> to{" "}
                 <span className="font-medium">{Math.min(indexOfLastItem, withdrawals.length)}</span> of{" "}
                 <span className="font-medium">{withdrawals.length}</span> results
@@ -304,7 +304,7 @@ const WithdrawalTable = () => {
                 <button
                   onClick={() => paginate(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white dark:bg-neutral-900 text-sm font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="sr-only">Previous</span>
                   <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -325,7 +325,7 @@ const WithdrawalTable = () => {
                       className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                         currentPage === pageNumber
                           ? "z-10 bg-blue-50 border-blue-500 text-blue-600"
-                          : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
+                          : "bg-white dark:bg-neutral-900 border-gray-300 text-gray-600 dark:text-gray-200 hover:bg-gray-50"
                       }`}
                     >
                       {pageNumber}
@@ -336,7 +336,7 @@ const WithdrawalTable = () => {
                 <button
                   onClick={() => paginate(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white dark:bg-neutral-900 text-sm font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="sr-only">Next</span>
                   <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

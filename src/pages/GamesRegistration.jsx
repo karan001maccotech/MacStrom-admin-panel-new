@@ -76,7 +76,7 @@ export default function EnhancedGamingTable() {
         }
       } catch (err) {
         if (isMounted) {
-          showNotification("Failed to load data from API", "error")
+          showNotification("Failed to load data from API",err)
         }
       } finally {
         if (isMounted) {
@@ -336,14 +336,14 @@ export default function EnhancedGamingTable() {
   const totalPages = Math.ceil(filteredData.length / rowsPerPage)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-700 p-4">
       {/* Loading Overlay */}
       {isLoading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 shadow-xl">
             <div className="flex items-center gap-3">
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-              <span className="text-gray-700 font-medium">Processing...</span>
+              <span className="text-gray-700 dark:text-gray-200 font-medium">Processing...</span>
             </div>
           </div>
         </div>
@@ -355,11 +355,11 @@ export default function EnhancedGamingTable() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-2">
             Gaming Data Management
           </h1>
-          <p className="text-gray-600 mb-6">Comprehensive gaming team data with advanced management capabilities</p>
+          <p className="text-gray-600 dark:text-gray-200 mb-6">Comprehensive gaming team data with advanced management capabilities</p>
 
           {/* Stats Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gray-600 from-blue-500 to-blue-600 text-white p-4 rounded-xl shadow-lg">
+            <div className="bg-gray-600 dark:bg-neutral-900 from-blue-500 to-blue-600 text-white p-4 rounded-xl shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-2xl font-bold">{statsData.totalPlayers}</p>
@@ -368,7 +368,7 @@ export default function EnhancedGamingTable() {
                 <Users className="h-8 w-8 text-blue-200" />
               </div>
             </div>
-            <div className="bg-gray-600 from-green-500 to-green-600 text-white p-4 rounded-xl shadow-lg">
+            <div className="bg-gray-600 dark:bg-neutral-900 from-green-500 to-green-600 text-white p-4 rounded-xl shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-2xl font-bold">{statsData.avgLevel}</p>
@@ -377,7 +377,7 @@ export default function EnhancedGamingTable() {
                 <TrendingUp className="h-8 w-8 text-green-200" />
               </div>
             </div>
-            <div className="bg-gray-600 from-purple-500 to-purple-600 text-white p-4 rounded-xl shadow-lg">
+            <div className="bg-gray-600 dark:bg-neutral-900 from-purple-500 to-purple-600 text-white p-4 rounded-xl shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-2xl font-bold">{statsData.topLevel}</p>
@@ -386,7 +386,7 @@ export default function EnhancedGamingTable() {
                 <Trophy className="h-8 w-8 text-purple-200" />
               </div>
             </div>
-            <div className="bg-gray-600 from-orange-500 to-orange-600 text-white p-4 rounded-xl shadow-lg">
+            <div className="bg-gray-600 dark:bg-neutral-900 from-orange-500 to-orange-600 text-white p-4 rounded-xl shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-2xl font-bold">{statsData.uniqueGamesCount}</p>
@@ -444,7 +444,7 @@ export default function EnhancedGamingTable() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-200 mb-4">
             <Eye className="h-4 w-4" />
             Showing {Math.min((page + 1) * rowsPerPage, filteredData.length)} of {filteredData.length} entries
             {searchTerm && ` (filtered from ${gamingData.length} total)`}
@@ -452,11 +452,11 @@ export default function EnhancedGamingTable() {
         </div>
 
         {/* Enhanced Table */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+                <tr className="bg-gray-600 dark:bg-neutral-900 text-white">
                   <th className="px-6 py-4 text-left font-semibold">Game</th>
                   <th className="px-6 py-4 text-left font-semibold">Team</th>
                   <th className="px-6 py-4 text-left font-semibold">Username</th>
@@ -472,9 +472,9 @@ export default function EnhancedGamingTable() {
               <tbody>
                 {paginatedData.map((row) => {
                   const isEditing = editingId === row.id
-                  const isMenuOpen = openMenuId === row.id
+                  // const isMenuOpen = openMenuId === row.id
                   return (
-                    <tr key={row.id} className="border-b hover:bg-gray-50">
+                    <tr key={row.id} className="border-b hover:bg-gray-50 dark:hover:bg-neutral-700">
                       {/* Game */}
                       <td className="px-6 py-4 text-left">
                         {isEditing ? (
@@ -485,7 +485,7 @@ export default function EnhancedGamingTable() {
                             className="w-32 px-3 py-2 border border-gray-300 rounded-lg"
                           />
                         ) : (
-                          <span className="font-medium text-gray-900">{row.gameName}</span>
+                          <span className="font-medium text-gray-900 dark:text-gray-200">{row.gameName}</span>
                         )}
                       </td>
 
@@ -499,7 +499,7 @@ export default function EnhancedGamingTable() {
                             className="w-40 px-3 py-2 border border-gray-300 rounded-lg"
                           />
                         ) : (
-                          <span className="text-gray-700">{row.teamName}</span>
+                          <span className="text-gray-700 dark:text-gray-200">{row.teamName}</span>
                         )}
                       </td>
 
@@ -513,7 +513,7 @@ export default function EnhancedGamingTable() {
                             className="w-32 px-3 py-2 border border-gray-300 rounded-lg"
                           />
                         ) : (
-                          <span className="text-gray-700">{row.username}</span>
+                          <span className="text-gray-700 dark:text-gray-200">{row.username}</span>
                         )}
                       </td>
 
@@ -545,7 +545,7 @@ export default function EnhancedGamingTable() {
                             className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-center"
                           />
                         ) : (
-                          <span className="font-medium text-gray-900">₹{row.registrationAmount || 0}</span>
+                          <span className="font-medium text-gray-900 dark:text-gray-200">₹{row.registrationAmount || 0}</span>
                         )}
                       </td>
 
@@ -575,7 +575,7 @@ export default function EnhancedGamingTable() {
                             className="w-56 px-3 py-2 border border-gray-300 rounded-lg text-center"
                           />
                         ) : row.registrationDate ? (
-                          <span className="text-gray-700">{new Date(row.registrationDate).toLocaleString()}</span>
+                          <span className="text-gray-700 dark:text-gray-200">{new Date(row.registrationDate).toLocaleString()}</span>
                         ) : (
                           <span className="text-gray-400 italic">N/A</span>
                         )}
@@ -616,7 +616,7 @@ export default function EnhancedGamingTable() {
                             className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center"
                           />
                         ) : row.age ? (
-                          <span className="text-gray-700">{row.age}</span>
+                          <span className="text-gray-700 dark:text-gray-200">{row.age}</span>
                         ) : (
                           <span className="text-gray-400 italic">N/A</span>
                         )}
@@ -652,7 +652,7 @@ export default function EnhancedGamingTable() {
                                 setOpenMenuId(openMenuId === row.id ? null : row.id)
                               }}
                               disabled={isLoading}
-                              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-600 dark:text-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                               title="Actions"
                             >
                               <MoreVertical className="h-5 w-5" />
@@ -679,7 +679,7 @@ export default function EnhancedGamingTable() {
                                       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-700">
                                         <Pencil className="h-3.5 w-3.5" />
                                       </span>
-                                      <span className="text-gray-700">Edit</span>
+                                      <span className="text-gray-700 dark:text-gray-200">Edit</span>
                                     </button>
                                   </li>
                                   <li>
@@ -712,9 +712,9 @@ export default function EnhancedGamingTable() {
           </div>
 
           {/* Pagination */}
-          <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+          <div className="px-6 py-4 bg-gray-50 dark:bg-neutral-900 border-t border-gray-200">
             <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-gray-200">
                 Page {page + 1} of {totalPages}
               </div>
               <div className="flex gap-2">
@@ -741,8 +741,8 @@ export default function EnhancedGamingTable() {
         {filteredData.length === 0 && !isLoading && (
           <div className="text-center py-12 bg-white rounded-2xl shadow-xl mt-8">
             <div className="text-6xl mb-4">🎮</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
-            <p className="text-gray-600 mb-6">Try adjusting your search terms or create a new entry</p>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-2">No results found</h3>
+            <p className="text-gray-600 dark:text-gray-200 mb-6">Try adjusting your search terms or create a new entry</p>
             <button
               onClick={() => setCreateDialogOpen(true)}
               disabled={isLoading}
@@ -764,16 +764,16 @@ export default function EnhancedGamingTable() {
                 <div className="p-2 bg-red-100 rounded-full">
                   <Trash2 className="h-6 w-6 text-red-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Confirm Delete</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200">Confirm Delete</h3>
               </div>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-200 mb-6">
                 Are you sure you want to delete this entry? This action cannot be undone.
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setDeleteDialogOpen(false)}
                   disabled={isLoading}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
@@ -805,7 +805,7 @@ export default function EnhancedGamingTable() {
             <div className="p-6 space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Game Name</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Game Name</label>
                   <input
                     type="text"
                     value={newEntry.gameName}
@@ -816,7 +816,7 @@ export default function EnhancedGamingTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Team Name</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Team Name</label>
                   <input
                     type="text"
                     value={newEntry.teamName}
@@ -829,7 +829,7 @@ export default function EnhancedGamingTable() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Username</label>
                   <input
                     type="text"
                     value={newEntry.username}
@@ -840,7 +840,7 @@ export default function EnhancedGamingTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Level</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Level</label>
                   <input
                     type="number"
                     min="1"
@@ -854,7 +854,7 @@ export default function EnhancedGamingTable() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Amount</label>
                   <input
                     type="number"
                     value={newEntry.registrationAmount}
@@ -865,7 +865,7 @@ export default function EnhancedGamingTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Payment ID</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Payment ID</label>
                   <input
                     type="text"
                     value={newEntry.paymentId}
@@ -875,7 +875,7 @@ export default function EnhancedGamingTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Registration Date & Time</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Registration Date & Time</label>
                   <input
                     type="datetime-local"
                     value={newEntry.registrationDate}
@@ -885,7 +885,7 @@ export default function EnhancedGamingTable() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Status</label>
                   <select
                     value={newEntry.status}
                     onChange={(e) => setNewEntry((prev) => ({ ...prev, status: e.target.value }))}
@@ -898,7 +898,7 @@ export default function EnhancedGamingTable() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Age</label>
                   <input
                     type="number"
                     value={newEntry.age}
@@ -913,7 +913,7 @@ export default function EnhancedGamingTable() {
                 <button
                   onClick={() => setCreateDialogOpen(false)}
                   disabled={isLoading}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>

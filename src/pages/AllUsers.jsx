@@ -128,7 +128,7 @@ const fetchUsers = async () => {
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="px-3 py-1 rounded-lg border hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="px-3 py-1 rounded-lg dark:text-white border hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 Cancel
               </button>
